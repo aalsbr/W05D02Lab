@@ -5,9 +5,11 @@ const defualtState = {
 const List = (state = defualtState, { type, payload }) => {
   switch (type) {
     case "Show":
-      return { List: payload };
+      return { List: payload};
     case "Add":
-      return { List: [...state.List, payload] };
+      return { List: [payload,...state.List ] };
+      case "Edit":
+        return { List: payload };
     case "Remove":
       return { List: state.List.filter((e) => e.id !== payload.id) };
     default:
@@ -25,6 +27,12 @@ export const show = (payload) => {
 export const add = (payload) => {
   return {
     type: "Add",
+    payload: payload,
+  };
+};
+export const edit = (payload) => {
+  return {
+    type: "Edit",
     payload: payload,
   };
 };
